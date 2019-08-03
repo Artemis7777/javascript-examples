@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>remove an ad</title>
+    <style>
+       *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            position:fixed;
+            left:0;
+            bottom:0;
+        }
+        div>img:nth-child(2){
+            position:absolute;
+            right:0;
+            top:-17px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img src="./images/sina-ad.png" alt="">
+    <img src="./images/close.jpg" alt="">
+</div>
+<script>
+    let oDiv = document.querySelector('div>img:nth-child(2)');
+    oDiv.onclick = function(){
+        document.body.removeChild(oDiv.parentNode);
+    }
+</script>
+</body>
+</html>
