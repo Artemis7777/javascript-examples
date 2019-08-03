@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simple slider carouse</title>
+    <style>
+        div{
+            width: 670px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            position: relative;
+        }
+        p{
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            left:0;
+            top:50%;
+            transform:translateY(-50%);
+
+        }
+        div>img{
+            vertical-align:bottom;
+        }
+        p>span {
+            display: inline-block;
+            height: 60px;
+            width: 30px;
+            line-height: 60px;
+            text-align: center;
+            background: black;
+            opacity: 0.4;
+            font-size:40px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img src="./images/ad1.jpg" alt="">
+    <p>
+        <span id="pre">&lt;</span>
+        <span id="next">&gt;</span>
+    </p>
+</div>
+<script>
+    let images = ["./images/ad1.jpg","./images/ad2.jpg","./images/ad3.jpg","./images/ad4.jpg","./images/ad5.jpg"];
+    let preBtn = document.querySelector("#pre");
+    let nextBtn = document.querySelector("#next");
+    let image = document.querySelector("img");
+    let currentIndex = 0;
+    let maxIndex = images.length - 1;
+    nextBtn.onclick = function(){
+        currentIndex++;
+        if (currentIndex  > maxIndex) {
+            currentIndex  = 0;
+        }
+        image.src = images[currentIndex];
+    };
+    preBtn.onclick = function(){
+        currentIndex --;
+        if (currentIndex < 0) {
+            currentIndex  = maxIndex;
+        }
+        image.src = images[currentIndex];
+    }
+</script>
+</body>
+</html>
