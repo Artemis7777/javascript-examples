@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simple image gallery</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    div {
+        width: 400px;
+        height: 484px;
+        margin: 100px auto;
+        border: 1px solid #000;
+    }
+    img{
+        width: 400px;
+    }
+    ul {
+        list-style: none;
+        display:flex;
+        justify-content: space-between;
+    }
+    li {
+        border: 2px solid transparent;
+        box-sizing: border-box;
+
+    }
+    .border{
+        border: 2px solid #eb7930;
+    }
+    li > img{
+        width:76px;
+        vertical-align: bottom;
+    }
+</style>
+<body>
+<div>
+    <img src="./images/pic1.jpg" alt="">
+    <ul>
+        <li><img src="./images/pic1.jpg" alt=""></li>
+        <li><img src="./images/pic2.jpg" alt=""></li>
+        <li><img src="./images/pic3.jpg" alt=""></li>
+        <li><img src="./images/pic4.jpg" alt=""></li>
+        <li><img src="./images/pic5.jpg" alt=""></li>
+    </ul>
+</div>
+<script>
+    let oImg = document.querySelector('div>img');
+    let oItems = document.querySelectorAll('li>img');
+    for (let item of oItems){
+        item.onmouseenter = function(){
+          this.parentNode.className = 'border';
+          oImg.src = item.src;
+        };
+        item.onmouseleave = function(){
+            this.parentNode.className = '';
+        }
+
+    }
+</script>
+</body>
+</html>
