@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>disabled submit button</title>
+</head>
+<body>
+<form action="https://www.google.com">
+    <input type="text" placeholder='please enter search word ' name = 'text'>
+    <input type="submit" value = 'search' >
+</form>
+<script>
+    let oDiv = document.querySelector('input[type = text]');
+    let oSubmit = document.querySelector('input[type = submit]');
+    oSubmit.disabled = true;
+    oDiv.oninput = function() {
+        oSubmit.disabled = this.value.length === 0;
+    }
+</script>
+</body>
+</html>
