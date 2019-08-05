@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tabs component practice</title>
+    <style>
+        * {
+            padding:0;
+            margin: 0;
+        }
+        div{
+            border: 1px solid #000;
+            margin:100px auto;
+            width: 500px;
+            height: 110px;
+            position: relative;
+        }
+        .current{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+        <li>我是第四个li</li>
+        <li>我是第五个li</li>
+    </ul>
+</div>
+<script>
+    //ES6
+    // let oItems = document.querySelectorAll('li');
+    // let prev = 0;
+    // for (let i = 0; i < oItems.length; i++){
+    //     oItems[i].onclick = function(){
+    //         oItems[prev].className = '';
+    //         this.className = 'current';
+    //         prev = i;
+    //     }
+    // }
+
+    //ES5
+    var oItems = document.querySelectorAll('li');
+    var prev = 0;
+    for (var i = 0; i < oItems.length; i++){
+        (function(index) {
+            oItems[index].onclick = function() {
+                oItems[prev].className = '';
+                this.className = 'current';
+                prev = index;
+            }
+        })(i);
+    }
+
+</script>
+</body>
+</html>
