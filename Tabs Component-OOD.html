@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab Component</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #tab {
+            width: 400px;
+            height: 30px;
+            background: blue;
+            border: 1px solid #000;
+            border-bottom: transparent;
+            box-sizing: border-box;
+            border-bottom: none;
+            margin: 100px auto;
+            margin-bottom: 0px;
+        }
+
+       #tab_top {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .tab-item {
+            border-right: 1px solid #cccccc;
+            width: 80px;
+            box-sizing: border-box;
+        }
+
+        .tab-item:last-child {
+           border-right:none;
+        }
+
+        #tab_bottom {
+            height: 1500px;
+            list-style: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tab-content {
+            width: 400px;
+            height: 300px;
+            background: red;
+            border: 1px solid #000;
+            border-top: transparent;
+            box-sizing: border-box;
+            display: none;
+        }
+
+        .selected{
+            background: red;
+        }
+
+    </style>
+</head>
+<body>
+<div id = 'tab'>
+    <ul id = 'tab_top'>
+        <li class = 'tab-item selected'>News</li>
+        <li class = 'tab-item'>Videos</li>
+        <li class = 'tab-item'>Musics</li>
+        <li class = 'tab-item'>Shopping</li>
+        <li class = 'tab-item'>Finance</li>
+    </ul>
+</div>
+<ul id = 'tab_bottom'>
+    <li class = 'tab-content'>News Content</li>
+    <li class = 'tab-content'>Video Content</li>
+    <li class = 'tab-content'>Musics Content</li>
+    <li class = 'tab-content'>Shopping Content</li>
+    <li class = 'tab-content'>Finance Content</li>
+</ul>
+<script>
+    class Tab {
+        constructor() {
+            this.oTabItems = document.querySelectorAll('.tab-item');
+            this.oTabContents = document.querySelectorAll('.tab-content');
+            this.prevIndex = 0;
+            this.oTabContents[0].style.display = 'block';
+        }
+
+        addClickEvent() {
+            for (let i = 0; i < this.oTabItems.length; i++) {
+                this.oTabItems[i].onclick = () => {
+                    this._change(i);
+                }
+            }
+        }
+
+        addMoveEvent() {
+            for (let i = 0; i < this.oTabItems.length; i++) {
+                this.oTabItems[i].onmousemove = () => {
+                    this._change(i);
+                }
+            }
+
+        }
+
+        _change(i) {
+            let preTabItem = this.oTabItems[this.prevIndex];
+            preTabItem.className = preTabItem.className.replace('selected','');
+            let preTabContent = this.oTabContents[this.prevIndex];
+            preTabContent.style.display = 'none';
+            let curTabItem = this.oTabItems[i];
+            curTabItem.className = curTabItem.className + ' selected';
+            let curTabContent = this.oTabContents[i];
+            curTabContent.style.display = 'block';
+            this.prevIndex = i;
+        }
+    }
+
+    let tab = new Tab();
+    // tab.addMoveEvent();
+    tab.addClickEvent();
+</script>
+</body>
+</html>
