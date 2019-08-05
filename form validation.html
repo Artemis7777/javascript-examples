@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<form action = 'https://www.google.com/'>
+    <input type="text" placeholder="please enter your name" name = "userName">
+    <input type="password" placeholder="please enter your password" name = "userPassword">
+    <input type="submit" value="Register">
+</form>
+<script>
+    let oText = document.querySelector('input[type=text]');
+    let oPassword = document.querySelector('input[type=password]');
+    let oSubmit = document.querySelector('input[type=submit]');
+
+    oSubmit.onclick = function(){
+        if (oText.value.length < 6) {
+                oText.style.borderColor = 'black';
+                return false;
+        } else {
+            oText.style.borderColor = 'transparent';
+        }
+        if (oPassword.value.length < 6) {
+            oPassword.style.borderColor = 'black';
+            return false;
+        } else {
+            oPassword.style.borderColor = 'transparent';
+        }
+    }
+</script>
+</body>
+</html>
