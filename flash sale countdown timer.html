@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flash sale countdown timer</title>
+    <link rel="stylesheet" href="fonts/iconfont.css">
+<style>
+    *{
+        padding:0;
+        margin:0;
+    }
+    div{
+        width: 200px;
+        margin:100px auto;
+        background-color: #c81107;
+        padding: 40px 10px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    h1{
+        color: white;
+    }
+    p{
+        font-weight:normal;
+        color:white;
+        font-size: 14px;
+    }
+    p:nth-of-type(1){
+        opacity: 0.5;
+    }
+    p:nth-of-type(2){
+        margin-top: 5px;
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        justify-content: center;
+    }
+    li{
+        background: #343432;
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        box-sizing: border-box;
+        position:relative;
+    }
+    li::before{
+        width: 100%;
+        height: 2px;
+        background: red;
+        content:"";
+        display: block;
+        position:absolute;
+        left:0;
+        top:50%;
+        transform: translateY(-50%);
+    }
+    .time{
+        font-size:25px;
+        line-height: 50px;
+        width: 50px;
+        color: white;
+    }
+
+</style>
+</head>
+<body>
+<div>
+    <h1>FLASH DEALS</h1>
+    <p>UP TO 50% OFF</p>
+    <i class = "iconfont icon-lightningbshandian" style = "font-size: 40px;color:white"></i>
+    <p>Limited Time Left</p>
+    <ul>
+        <li id = 'hour' class = 'time'> </li>
+        <li id = 'minute' class = 'time'></li>
+        <li  id = 'second' class = 'time'></li>
+    </ul>
+    <script>
+        function getDifferTime(remDate, curDate = new Date()){
+            let differTime = remDate - curDate;
+            let differSecond = differTime / 1000;
+            let hour = Math.floor(differSecond / (60 * 60) % 24);
+            hour = hour >= 10 ? hour : "0" + hour;
+            let minute = Math.floor(differSecond / 60 % 60);
+            minute = minute >= 10 ? minute : "0" + minute;
+            let second = Math.floor(differSecond % 60);
+            second = second>= 10 ? second : "0" + second;
+            return {
+                hour: hour,
+                minute: minute,
+                second: second
+            }
+
+        }
+        let oHour = document.querySelector('#hour');
+        let oMinute= document.querySelector('#minute');
+        let oSecond= document.querySelector('#second');
+        let remDate = new Date("2019-8-6 22:00:00");
+
+        setInterval(function(){
+            setTime(remDate);
+        },1000);
+
+        function setTime(remDate){
+            let obj = getDifferTime(remDate);
+            oSecond.innerHTML = obj.second;
+            oHour.innerHTML = obj.hour;
+            oMinute.innerText = obj.minute;
+        }
+        setTime(remDate);
+    </script>
+</div>
+</body>
+</html>
