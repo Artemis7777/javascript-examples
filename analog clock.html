@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>analog clock</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        .clock{
+            background:url('./images/clock.png') 0 0 no-repeat;
+            margin: 100px auto;
+            width: 300px;
+            height:600px;
+            position:relative;
+        }
+        .box{
+            position:absolute;
+            width: 120px;
+            height: 120px;
+            left:50%;
+            transform: translateX(-50%);
+            bottom:220px
+        }
+        .hour, .second, .minute{
+            background: url('./images/hour.png') 0 0 no-repeat;
+            left:50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 120px;
+            position:absolute;
+        }
+        .second{
+            background: url('./images/second.png') 0 0 no-repeat;
+        }
+        .minute{
+            background: url('./images/minute.png') 0 0 no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class = "clock">
+<div class = "box">
+   <div class = "hour"></div>
+    <div class = "second"></div>
+    <div class = "minute"></div>
+</div>
+</div>
+
+<script>
+    let oHour = document.querySelector('.hour');
+    let oMinute = document.querySelector('.minute');
+    let oSecond = document.querySelector('.second');
+    setTime();
+    setInterval(function() {
+        setTime();
+    },1000);
+
+    function setTime(){
+        let date = new Date();
+        oHour.style.transform = `rotateZ(${date.getHours() * 30}deg)`;
+        oMinute.style.transform = `rotateZ(${date.getMinutes() * 6}deg)`;
+        oSecond.style.transform = `rotateZ(${date.getSeconds() * 6}deg)`;
+    }
+
+
+</script>
+</body>
+</html>
