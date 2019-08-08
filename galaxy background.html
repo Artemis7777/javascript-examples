@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>galaxy background</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+
+        span {
+            background: url('./images/star.png') 0 0 no-repeat;
+            background-size: 100% 100%;
+            display: inline-block;
+            width: 56px;
+            height: 56px;
+            animation: flash 1s alternate infinite;
+            position: absolute;
+        }
+
+        span:hover {
+            transform: scale(3, 3) rotate(360deg) !important;
+            transition: all 1.5s;
+        }
+
+        @keyframes flash {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<span>
+</span>
+<script>
+
+    let {width, height} = getScreen();
+    for (let i = 0; i <  200; i++) {
+        let star = document.createElement('span');
+        document.body.appendChild(star);
+        let scale = Math.random();
+        star.style.transform = `scale(${scale},${scale})`;
+        star.style.left = Math.random() * width + 'px';
+        star.style.top = Math.random() * height + 'px';
+        star.style.animationDelay = Math.random() * 2 + 's';
+    }
+    function getScreen() {
+        let width, height;
+        if (window.innerWidth) {
+            width = window.innerWidth;
+            height = window.innerHeight;
+        } else if (document.compatMode === "BackCompat") {
+            width = document.body.clientWidth;
+            height = document.body.clientHeight;
+        } else {
+            width = document.documentElement.clientWidth;
+            height = document.documentElement.clientHeight;
+        }
+        return {
+            width: width,
+            height: height
+        }
+    }
+</script>
+</body>
+</html>
