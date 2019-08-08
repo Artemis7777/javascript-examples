@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peppa Pig cursor</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        .pig{
+            background: #fff url(./images/pig.gif) 0 0 no-repeat;
+            width: 400px;
+            height: 424px;
+        }
+
+    </style>
+</head>
+<body>
+<div class = 'pig'>
+</div>
+<script>
+    let oPig = document.querySelector('.pig');
+   document.body.addEventListener('mousemove', pigPosition);
+    function pigPosition(e){
+        e = e || window.e;
+        oPig.style.marginLeft= e.clientX - parseFloat(getComputedStyle(oPig).width) / 2 + 'px';
+        oPig.style.marginTop = e.clientY - parseFloat(getComputedStyle(oPig).height) / 2+ 'px';
+    }
+</script>
+</body>
+</html>
