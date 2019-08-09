@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flexible navigation</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            width: 900px;
+            height: 63px;
+            margin:100px auto;
+            border: 1px solid #000;
+            position:relative;
+            
+        }
+        ul{
+            list-style:none;
+            display: flex;
+            line-height: 60px;
+            height: 63px;
+            width: 800px;
+            justify-content:space-around;
+            font-size:10px;
+            position:relative;
+            z-index: 999;
+        }
+        .monkey{
+            background-size: 1376px 101px;
+            display: inline-block;
+            background: url('https://d3rqdbvvokrlbl.cloudfront.net/lib/images/sites/header-sprite-1513187937340.2x.png') -300px 0 no-repeat;
+            position:absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-size: 1509px 88px;
+            width: 69px;
+            height: 57px;
+        }
+        li{
+            height: 63px;
+            width: 83px;
+            text-align:center;
+        }
+        .mall{
+            height: 63px;
+            width: 83px;
+            background: url('./images/tMall.png') 0 0 no-repeat;
+            background-size: auto;
+            position:absolute;
+            left:0;
+            top:0;
+
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <ul>
+        <li>All Deals</li>
+        <li>Home</li>
+        <li>Electronics</li>
+        <li>Computers</li>
+        <li>Tools</li>
+        <li>Sports</li>
+        <li>Shirt</li>
+        <li>Gourmet</li>
+        <li>Clearance</li>
+    </ul>
+    <span class = 'mall'>
+
+    </span>
+    <span class = 'monkey'>
+    </span>
+</div>
+<script>
+    let oLi = document.querySelectorAll('li');
+    let bg = document.querySelector('.mall');
+    for (let li of oLi) {
+        li.onclick = function () {
+            easeAnimation(bg, {'left':this.offsetLeft})
+        }}
+
+    function easeAnimation(ele, obj, fn) {
+        clearInterval(ele.timerId);
+        ele.timerId = setInterval(function () {
+            let flag = true;
+            for(let key in obj){
+                let target = obj[key];
+                let style = getComputedStyle(ele);
+                let begin = parseInt(style[key]) || 0;
+                let step = (target - begin) * 0.4;
+                begin += step;
+                if(Math.abs(Math.floor(step)) > 1){
+                    flag = false;
+                }else{
+                    begin = target;
+                }
+                ele.style[key] = begin + "px";
+            }
+            if(flag){
+                clearInterval(ele.timerId);
+                fn && fn();
+            }
+        }, 100)}
+</script>
+</body>
+</html>
