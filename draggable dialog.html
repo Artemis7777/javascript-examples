@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>draggable dialog</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        p{
+            background: red;
+            text-align:center;
+        }
+        .mask{
+            width: 100%;
+            height: 100%;
+            background: black;
+            position:absolute;
+            left:0;
+            top:0;
+            opacity:0.5;
+            display: none;
+        }
+        .login{
+            width: 400px;
+            height: 400px;
+            background: red;
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            display:none;
+        }
+        .x{
+
+            position:absolute;
+            right:0;
+            top:-5px;
+            display: none;
+
+        }
+
+    </style>
+</head>
+<body>
+<p>login</p>
+<a href="http://www.google.com">google</a>
+<div class = "mask">
+</div>
+<div class = 'login'><span class = 'x'>x</span></div>
+<script>
+    let button = document.querySelector('p');
+    let login = document.querySelector('.login');
+    let x = document.querySelector('.x');
+    let mask = document.querySelector('.mask');
+    button.onclick = function(){
+        login.style.display = 'block';
+        mask.style.display = 'block';
+        x.style.display = 'block';
+    }
+    x.onclick = function(){
+        login.style.display = 'none';
+        mask.style.display = 'none';
+        x.style.display = 'none';
+    }
+    login.onmousedown = function(event){
+        login.style.cursor = 'move';
+        let fixWidth = event.pageX - login.offsetLeft;
+        let fixHeight = event.pageY - login.offsetTop;
+        login.onmousemove = function(event){
+            login.style.left = event.pageX - fixWidth + 'px';
+            login.style.top  = event.pageY - fixHeight  + 'px';
+
+        }
+
+    }
+    login.onmouseup = function(){
+        login.onmousemove = null;
+    }
+</script>
+</body>
+</html>
