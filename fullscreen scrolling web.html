@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fullscreen scrolling web</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    .page {
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .page > li {
+        width: 100%;
+        height: 100%;
+        line-height:180% ;
+        text-align: center;
+        font-size: 300px;
+        color: white;
+    }
+
+    .bar {
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        list-style: none;
+    }
+
+    .bar span {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: white;
+        display: inline-block;
+    }
+
+    .bar li {
+        margin-top: 2px;
+        text-align: center;
+    }
+
+    .bar .not:hover {
+        transform: scale(1.8, 1.8);
+        transition: all 0.1s;
+    }
+
+    .bar .selected {
+        width: 11px;
+        height: 11px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+</style>
+<body>
+<ul class='page'>
+    <li>one</li>
+    <li>two</li>
+    <li>three</li>
+    <li>four</li>
+</ul>
+<ul class='bar'>
+    <li><span class='selected'></span></li>
+    <li><span class='not'></span></li>
+    <li><span class='not'></span></li>
+    <li><span class='not'></span></li>
+</ul>
+<script>
+    let color = ['#E9757F', '#4498E5', '#F5C445', '#EB6950'];
+    let pages = document.querySelectorAll('.page>li');
+    let bars = document.querySelectorAll('.bar>li>span');
+    let lis = document.querySelectorAll('.bar>li');
+    for (let i = 0; i < pages.length; i++) {
+        pages[i].style.backgroundColor = color[i];
+    }
+    let prev = bars[0];
+    let timerId = null;
+    for (let i = 0; i < lis.length; i++) {
+        lis[i].onclick = function () {
+            prev.className = 'not';
+            bars[i].className = 'selected';
+            prev = bars[i];
+            clearInterval(timerId);
+            timerId = setInterval(function () {
+                let begin = window.pageYOffset;
+                let target = i * window.innerHeight;
+                let step = (target - begin) * 0.3;
+                begin += step;
+                if (Math.abs(Math.floor(step)) <= 1) {
+                    clearInterval(timerId);
+                    window.scrollTo(0, target);
+                    return;
+                }
+                window.scrollTo(0, begin);
+            }, 50)
+
+        }
+    }
+</script>
+</body>
+</html>
