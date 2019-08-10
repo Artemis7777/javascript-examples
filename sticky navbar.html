@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sticky navbar</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        img{
+            width: 100%;
+            vertical-align:top;
+        }
+
+    </style>
+</head>
+<body>
+<img src="./images/woot-top.jpg" alt="" id = 'top'>
+<img src="./images/woot-nav.jpg" alt="" id = 'nav'>
+<img src="./images/woot-main.jpg" alt="">
+<script>
+    let oTop = document.querySelector('#top');
+    let oNav =  document.querySelector('#nav');
+    window.onscroll = function() {
+        let {y} = getPageScroll();
+        if (y > oTop.offsetHeight) {
+            oNav.style.position = "fixed";
+            oNav.style.left = '0';
+            oNav.style.top = '0';
+            } else {
+                oNav.style.position = "relative";
+            }
+        }
+
+    function getPageScroll() {
+        let x, y;
+        if (window.pageXOffset) {
+            x = window.pageXOffset;
+            y = window.pageYOffset;
+        } else if (document.compatMode === "BackCompat") {
+            x = document.body.scrollLeft;
+            y = document.body.scrollTop;
+        } else {
+            x = document.documentElement.scrollLeft;
+            y = document.documentElement.scrollTop;
+        }
+        return {
+            x: x,
+            y: y
+        }
+    }
+</script>
+</body>
+</html>
