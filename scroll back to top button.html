@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scroll back to top button</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        img{
+            width: 100%;
+            vertical-align:top;
+        }
+        span{
+            display: none;
+            position:fixed;
+            right:10px;
+            bottom:10px;
+            width: 50px;
+            height: 50px;
+            background:red;
+            line-height:50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<img src="./images/woot-top.jpg" alt="" id = 'top'>
+<img src="./images/woot-nav.jpg" alt="" id = 'nav'>
+<img src="./images/woot-main.jpg" alt="">
+<span>TOP</span>
+<script>
+    let oTop = document.querySelector('span');
+    window.onscroll = function(){
+        if (window.pageYOffset > 400){
+            oTop.style.display = 'inline-block';
+        } else {
+            oTop.style.display = 'none';
+        }
+    }
+    oTop.onclick = function(){
+       let timeId = setInterval(function(){
+            let begin = window.pageYOffset;
+            let target = 0;
+            let step = (begin - target) * 0.3;
+            begin = begin - step;
+            if(Math.floor(step) <= 1) {
+                clearInterval(timeId);
+                window.scrollTo(0,0);
+                return;
+            }
+            window.scrollTo(0,begin);
+
+        },50)
+    }
+</script>
+</body>
+</html>
